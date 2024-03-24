@@ -53,6 +53,7 @@
     <Compile Include="ProductosDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tienda_DbContext.cs" />
+    <Compile Include="VentasDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

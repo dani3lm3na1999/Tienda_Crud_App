@@ -15,8 +15,7 @@ namespace CapaEntidades
         public int VentaId { get; set; }
 
         [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime FechaVenta { get; set; } = DateTime.Now;
+        public DateTime FechaVenta { get; set; }
 
         [Required]
         public decimal TotalVenta { get; set; }
@@ -25,7 +24,10 @@ namespace CapaEntidades
         public List<DetalleVenta> Detalles { get; set; }
 
         // Constructor por defecto
-        public Venta() { }
+        public Venta() 
+        {
+            Detalles = new List<DetalleVenta>();
+        }
 
         // Constructor para inicializar propiedades
         public Venta(decimal totalVenta)

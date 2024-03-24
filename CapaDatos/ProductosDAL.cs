@@ -15,7 +15,6 @@ namespace CapaDatos
         {
             _db = new Tienda_DbContext();
 
-            Producto consulta = new Producto();
             int resultado;
 
             if (actualizando)
