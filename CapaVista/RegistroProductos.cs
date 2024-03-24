@@ -27,6 +27,7 @@ namespace CapaVista
             if (actualizando)
             {
                 this.Text = "Tienda|Edición de Productos";
+                btnGuardar.Text = "Actualizar";
                 CargarDatos();
             }
         }

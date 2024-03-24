@@ -34,7 +34,20 @@ namespace CapaLogica
         {
             _productoDAL = new ProductosDAL();
 
-            return _productoDAL.ListaFiltro(codigo, nombre, activos);
+            List<Producto> listado = _productoDAL.Lista();
+
+            if (codigo > 0)
+            {
+                return listado.Where(p => p.ProductoId == codigo && p.Estado == activos).ToList();
+            }
+            else if (!string.IsNullOrEmpty(nombre))
+            {
+                return listado.Where(p => p.Nombre.Contains(nombre) && p.Estado == activos).ToList();
+            }
+            else
+            {
+                return listado.Where(p => p.ProductoId == codigo && p.Nombre.Contains(nombre) && p.Estado == activos).ToList();
+            }            
         }
 
         public Producto ObtenerProducto(int id)
