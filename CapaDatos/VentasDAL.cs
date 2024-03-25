@@ -9,11 +9,11 @@ namespace CapaDatos
 {
     public class VentasDAL
     {
-        Tienda_DbContext _db;
+        ContextoBD _db;
 
         public int Guardar(Venta venta, int id, bool actualizando = false)
         {
-            _db = new Tienda_DbContext();
+            _db = new ContextoBD();
             int resultado;
 
             if (actualizando)
@@ -34,7 +34,7 @@ namespace CapaDatos
 
         public List<Venta> Lista()
         {
-            _db = new Tienda_DbContext();
+            _db = new ContextoBD();
 
             return _db.Ventas.ToList();
         }

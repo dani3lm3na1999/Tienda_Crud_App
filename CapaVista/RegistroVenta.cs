@@ -1,6 +1,7 @@
 ﻿using CapaDatos;
 using CapaEntidades;
 using CapaLogica;
+using CapaVista.Visores;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -191,20 +192,26 @@ namespace CapaVista
             try
             {
                 Venta venta = new Venta();
+                List<Producto> productos = new List<Producto>();
+
                 decimal montoTotal = decimal.Parse(txtMonto.Text);
 
                 venta.FechaVenta = DateTime.Now;
                 venta.TotalVenta = montoTotal;
 
                 foreach (DataRow row in detalleVenta.Rows)
-                {
+                {                    
                     var detalle = new DetalleVenta() 
                     {
                         ProductoId = (int)row["Código"],
+                        Precio = (decimal)row["PrecioU"],
                         Cantidad = (int)row["Cantidad"]
                     };
 
+                    var producto = _controlProducto.ObtenerProducto(detalle.ProductoId);
+
                     venta.Detalles.Add(detalle);
+                    productos.Add(producto);
                 }
 
                 int resultado = _controlVenta.Guardar(venta, 0, false);
@@ -212,6 +219,9 @@ namespace CapaVista
                 {
                     MessageBox.Show("Venta procesada con exito", "UNAB|Chalatenango, El Salvador", 
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    VisorRptFactura objVsrFactura = new VisorRptFactura(venta, productos);
+                    objVsrFactura.ShowDialog();
                     this.Close();
                 }
                 else
@@ -241,8 +251,7 @@ namespace CapaVista
                         decimal subTotal = precioUnitario * cantidad;
                         dgvDetalleVenta.Rows[e.RowIndex].Cells["SubTotal"].Value = subTotal;
 
-                        decimal nuevoMonto = CalcularMontoTotal();
-                        txtMonto.Text = nuevoMonto.ToString();
+                        CalcularMontoTotal();                        
                     }
                     else
                     {
@@ -258,7 +267,7 @@ namespace CapaVista
             }
         }
 
-        private decimal CalcularMontoTotal()
+        private void CalcularMontoTotal()
         {
             decimal montoTotal = 0;
 
@@ -268,13 +277,18 @@ namespace CapaVista
                 montoTotal += decimal.Parse(row.Cells["SubTotal"].Value.ToString());
             }
 
-            return montoTotal;
+            txtMonto.Text = montoTotal.ToString();
         }
 
         private void LimpiarCampos()
         {
             txtCodigo.Text = "0";
             txtCantidad.Clear();
+        }
+
+        private void dgvDetalleVenta_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            CalcularMontoTotal();
         }
     }
 }

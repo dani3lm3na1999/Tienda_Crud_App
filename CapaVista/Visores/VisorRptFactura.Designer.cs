@@ -43,6 +43,12 @@
             this.crvFactura.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.crvFactura.Location = new System.Drawing.Point(0, 0);
             this.crvFactura.Name = "crvFactura";
+            this.crvFactura.ShowCloseButton = false;
+            this.crvFactura.ShowCopyButton = false;
+            this.crvFactura.ShowGroupTreeButton = false;
+            this.crvFactura.ShowParameterPanelButton = false;
+            this.crvFactura.ShowRefreshButton = false;
+            this.crvFactura.ShowTextSearchButton = false;
             this.crvFactura.Size = new System.Drawing.Size(799, 450);
             this.crvFactura.TabIndex = 0;
             this.crvFactura.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
@@ -55,6 +61,7 @@
             this.Controls.Add(this.crvFactura);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "VisorRptFactura";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tienda|Factura Venta";
             this.ResumeLayout(false);
 

@@ -9,11 +9,11 @@ namespace CapaDatos
 {
     public class ProductosDAL
     {
-        Tienda_DbContext _db;
+        ContextoBD _db;
 
         public int Guardar(Producto producto, int id, bool actualizando = false)
         {
-            _db = new Tienda_DbContext();
+            _db = new ContextoBD();
 
             int resultado;
 
@@ -46,21 +46,21 @@ namespace CapaDatos
 
         public List<Producto> Lista(bool activos = true)
         {
-            _db = new Tienda_DbContext();
+            _db = new ContextoBD();
 
             return _db.Productos.Where(x => x.Estado == activos).ToList();
         }
 
         public Producto ObtenerProducto(int id)
         {
-            _db = new Tienda_DbContext();
+            _db = new ContextoBD();
 
             return _db.Productos.Find(id);
         }
 
         public int EliminarProducto(int id)
         {
-            _db = new Tienda_DbContext();
+            _db = new ContextoBD();
             int resultado;
 
             var producto = _db.Productos.Find(id);

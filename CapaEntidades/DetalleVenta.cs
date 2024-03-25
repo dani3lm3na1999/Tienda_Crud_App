@@ -19,6 +19,8 @@ namespace CapaEntidades
 
         [Required]
         public int ProductoId { get; set; }
+        [Required]
+        public decimal Precio { get; set; }
 
         [Required]
         public int Cantidad { get; set; }
