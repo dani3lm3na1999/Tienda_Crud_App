@@ -61,15 +61,16 @@
             // MnRegistroVenta
             // 
             this.MnRegistroVenta.Name = "MnRegistroVenta";
-            this.MnRegistroVenta.Size = new System.Drawing.Size(168, 22);
+            this.MnRegistroVenta.Size = new System.Drawing.Size(180, 22);
             this.MnRegistroVenta.Text = "Registro de Venta";
             this.MnRegistroVenta.Click += new System.EventHandler(this.MnRegistroVenta_Click);
             // 
             // MnReporteVentas
             // 
             this.MnReporteVentas.Name = "MnReporteVentas";
-            this.MnReporteVentas.Size = new System.Drawing.Size(168, 22);
+            this.MnReporteVentas.Size = new System.Drawing.Size(180, 22);
             this.MnReporteVentas.Text = "Reporte de Ventas";
+            this.MnReporteVentas.Click += new System.EventHandler(this.MnReporteVentas_Click);
             // 
             // productosToolStripMenuItem
             // 

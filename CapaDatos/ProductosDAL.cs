@@ -23,14 +23,23 @@ namespace CapaDatos
 
                 _db.Entry(producto).State = System.Data.Entity.EntityState.Modified;
                 _db.SaveChanges();
+                resultado = producto.ProductoId;
             }
             else
             {
-                _db.Productos.Add(producto);
-                _db.SaveChanges();
-            }
+                var consulta = _db.Productos.Where(p => p.Nombre.Equals(producto.Nombre)).FirstOrDefault();
 
-            resultado = producto.ProductoId;
+                if(consulta != null)
+                {
+                    resultado = 0;
+                }
+                else
+                {
+                    _db.Productos.Add(producto);
+                    _db.SaveChanges();
+                    resultado = producto.ProductoId;
+                }                
+            }
 
             return resultado;
         }

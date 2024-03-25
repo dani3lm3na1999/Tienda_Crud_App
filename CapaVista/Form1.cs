@@ -34,5 +34,10 @@ namespace CapaVista
             MantenimientoProductos objMttProductos = new MantenimientoProductos();
             objMttProductos.ShowDialog();
         }
+
+        private void MnReporteVentas_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

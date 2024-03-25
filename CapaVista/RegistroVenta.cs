@@ -28,9 +28,9 @@ namespace CapaVista
             detalleVenta = new DataTable();
             detalleVenta.Columns.Add("Código", typeof(int));
             detalleVenta.Columns.Add("Nombre", typeof(string));
-            detalleVenta.Columns.Add("Precio U", typeof(decimal));
+            detalleVenta.Columns.Add("PrecioU", typeof(decimal));
             detalleVenta.Columns.Add("Cantidad", typeof(int));
-            detalleVenta.Columns.Add("Sub Total", typeof(decimal));
+            detalleVenta.Columns.Add("SubTotal", typeof(decimal));
         }
 
         private void CargarProductos()
@@ -74,6 +74,11 @@ namespace CapaVista
                     MessageBox.Show("Debe Ingresar productos para procesar la venta", "UNAB|Chalatenango, El Salvador",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
+                if (string.IsNullOrEmpty(txtMonto.Text) || decimal.Parse(txtMonto.Text) <= 0)
+                {
+                    MessageBox.Show("El monto total debe ser mayor a cero", "UNAB|Chalatenango, El Salvador",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
                 else
                 {
                     valido = true;
@@ -88,7 +93,7 @@ namespace CapaVista
                     txtCodigo.Focus();
                     txtCodigo.BackColor = Color.LightYellow;
                 }
-                if (string.IsNullOrEmpty(txtCantidad.Text))
+                if (string.IsNullOrEmpty(txtCantidad.Text) || int.Parse(txtCantidad.Text) <= 0)
                 {
                     MessageBox.Show("Debe Ingresar la cantidad de producto a vender", "UNAB|Chalatenango, El Salvador",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -112,7 +117,7 @@ namespace CapaVista
                 int codigo = int.Parse(txtCodigo.Text);
                 int cantidad = int.Parse(txtCantidad.Text);
 
-                var producto = _controlProducto.ObtenerProducto(codigo);
+                var producto = (Producto)productoBindingSource.Current;
 
                 if(producto != null)
                 {
@@ -126,10 +131,12 @@ namespace CapaVista
 
                 foreach (DataRow row in detalleVenta.Rows)
                 {
-                    montoTotal += (decimal)row["Sub Total"];
+                    montoTotal += (decimal)row["SubTotal"];
                 }
 
                 txtMonto.Text = montoTotal.ToString();
+
+                LimpiarCampos();
             }
             catch (Exception)
             {
@@ -170,7 +177,11 @@ namespace CapaVista
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            ProcesarVenta();
+            bool esValido = ValidarDatos(true);
+            if(esValido)
+            {
+                ProcesarVenta();
+            }
         }
 
         private void ProcesarVenta()
@@ -218,11 +229,32 @@ namespace CapaVista
 
         private void dgvDetalleVenta_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            try
             {
-                decimal nuevoMonto = CalcularMontoTotal();
+                if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+                {
+                    bool precioValido = decimal.TryParse(dgvDetalleVenta.Rows[e.RowIndex].Cells["PrecioU"].Value.ToString(), out decimal precioUnitario);
+                    bool cantidadValida = int.TryParse(dgvDetalleVenta.Rows[e.RowIndex].Cells["Cantidad"].Value.ToString(), out int cantidad);
 
-                txtMonto.Text = nuevoMonto.ToString();
+                    if (precioValido && cantidadValida || precioUnitario > 0 && cantidad > 0)
+                    {
+                        decimal subTotal = precioUnitario * cantidad;
+                        dgvDetalleVenta.Rows[e.RowIndex].Cells["SubTotal"].Value = subTotal;
+
+                        decimal nuevoMonto = CalcularMontoTotal();
+                        txtMonto.Text = nuevoMonto.ToString();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Debe colocar un precio y una cantidad validad", "UNAB|Chalatenango, El Salvador",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Ocurrio un error", "UNAB|Chalatenango, El Salvador",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -232,11 +264,17 @@ namespace CapaVista
 
             foreach (DataGridViewRow row in dgvDetalleVenta.Rows)
             {
-                decimal subTotal = Convert.ToDecimal(row.Cells["Sub Total"].Value);
-                montoTotal += subTotal;
+                
+                montoTotal += decimal.Parse(row.Cells["SubTotal"].Value.ToString());
             }
 
             return montoTotal;
+        }
+
+        private void LimpiarCampos()
+        {
+            txtCodigo.Text = "0";
+            txtCantidad.Clear();
         }
     }
 }

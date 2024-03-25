@@ -132,27 +132,27 @@ namespace CapaVista
             if(string.IsNullOrEmpty(txtNombre.Text))
             {
                 MessageBox.Show("Debe Ingresar el nombre del producto", "UNAB|Chalatenango El Salvador",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtNombre.Focus();
                 txtNombre.BackColor = Color.LightYellow;
             }
             else if(string.IsNullOrEmpty(txtDescripcion.Text)) {
                 MessageBox.Show("Debe Ingresar la descripción del producto", "UNAB|Chalatenango El Salvador",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtDescripcion.Focus();
                 txtDescripcion.BackColor = Color.LightYellow;
             }
             else if(string.IsNullOrEmpty(txtPrecio.Text) || Convert.ToDecimal(txtPrecio.Text) == 0)
             {
                 MessageBox.Show("Debe Ingresar el precio del producto", "UNAB|Chalatenango El Salvador",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtPrecio.Focus();
                 txtPrecio.BackColor = Color.LightYellow;
             }
             else if(string.IsNullOrEmpty(txtExistencias.Text) || Convert.ToInt32(txtExistencias.Text) == 0)
             {
                 MessageBox.Show("Debe Ingresar las existencias del producto", "UNAB|Chalatenango El Salvador",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtExistencias.Focus();
                 txtExistencias.BackColor = Color.LightYellow;
             }
