@@ -53,6 +53,8 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.txtMonto = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtExistencias = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.productoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DetalleBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleVenta)).BeginInit();
@@ -141,7 +143,7 @@
             this.btnAgregar.BackColor = System.Drawing.Color.Green;
             this.btnAgregar.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregar.ForeColor = System.Drawing.Color.White;
-            this.btnAgregar.Location = new System.Drawing.Point(233, 58);
+            this.btnAgregar.Location = new System.Drawing.Point(521, 58);
             this.btnAgregar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(83, 30);
@@ -264,11 +266,34 @@
             this.txtMonto.Text = "0.00";
             this.txtMonto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(278, 62);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(62, 16);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Existencias:";
+            // 
+            // txtExistencias
+            // 
+            this.txtExistencias.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.productoBindingSource, "Stock", true));
+            this.txtExistencias.Location = new System.Drawing.Point(346, 59);
+            this.txtExistencias.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtExistencias.Name = "txtExistencias";
+            this.txtExistencias.ReadOnly = true;
+            this.txtExistencias.Size = new System.Drawing.Size(89, 22);
+            this.txtExistencias.TabIndex = 13;
+            this.txtExistencias.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // RegistroVenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(623, 352);
+            this.Controls.Add(this.txtExistencias);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.txtMonto);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnCancelar);
@@ -319,5 +344,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn PrecioU;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn SubTotal;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtExistencias;
     }
 }

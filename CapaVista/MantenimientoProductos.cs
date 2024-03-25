@@ -18,17 +18,13 @@ namespace CapaVista
         public MantenimientoProductos()
         {
             InitializeComponent();
+            CargarProductos();
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             RegistroProductos objRegistroProductos = new RegistroProductos();
             objRegistroProductos.ShowDialog();
-            CargarProductos();
-        }
-
-        private void MantenimientoProductos_Load(object sender, EventArgs e)
-        {
             CargarProductos();
         }
 

@@ -105,11 +105,23 @@
       <DependentUpon>RptFacturaVenta.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\RptVentas.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RptVentas.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Visores\VisorRptFactura.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Visores\VisorRptFactura.Designer.cs">
       <DependentUpon>VisorRptFactura.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Visores\VisorRptVentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Visores\VisorRptVentas.Designer.cs">
+      <DependentUpon>VisorRptVentas.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -135,8 +147,15 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RptFacturaVenta.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RptVentas.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RptVentas.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Visores\VisorRptFactura.resx">
       <DependentUpon>VisorRptFactura.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Visores\VisorRptVentas.resx">
+      <DependentUpon>VisorRptVentas.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\CapaEntidades.DetalleVenta.datasource" />
@@ -184,7 +203,9 @@
   <ItemGroup>
     <None Include="Resources\save_v2.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\print.png" />
+  </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>

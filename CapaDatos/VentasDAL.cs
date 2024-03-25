@@ -32,11 +32,13 @@ namespace CapaDatos
             return resultado;
         }
 
-        public List<Venta> Lista()
+        public List<Venta> Lista(DateTime fechaIni, DateTime fechaFin)
         {
             _db = new ContextoBD();
 
-            return _db.Ventas.ToList();
+            return _db.Ventas.Where(v => v.FechaVenta > fechaIni.Date && v.FechaVenta < fechaFin.Date).ToList();
         }
     }
+
+
 }

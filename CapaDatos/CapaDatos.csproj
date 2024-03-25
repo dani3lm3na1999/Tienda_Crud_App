@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContextoBD.cs" />
+    <Compile Include="DetalleDAL.cs" />
     <Compile Include="Migrations\202403250447272_Chg_Detall_Venta.cs" />
     <Compile Include="Migrations\202403250447272_Chg_Detall_Venta.Designer.cs">
       <DependentUpon>202403250447272_Chg_Detall_Venta.cs</DependentUpon>

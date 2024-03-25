@@ -19,11 +19,11 @@ namespace CapaLogica
             return _ventaDAL.Guardar(venta, id, actualizando); 
         }
 
-        public List<Venta> Lista()
+        public List<Venta> Lista(DateTime fechaIni, DateTime fechaFin)
         {
             _ventaDAL = new VentasDAL();
 
-            return _ventaDAL.Lista();
+            return _ventaDAL.Lista(fechaIni, fechaFin);
         }
     }
 }

@@ -156,7 +156,7 @@ namespace CapaVista
 
                 var producto = _controlProducto.ObtenerProducto(codigo);
 
-                if(producto != null)
+                if(producto != null && producto.Estado == true)
                 {
                     cbxNombre.Text = producto.Nombre;
                 }
@@ -192,7 +192,6 @@ namespace CapaVista
             try
             {
                 Venta venta = new Venta();
-                List<Producto> productos = new List<Producto>();
 
                 decimal montoTotal = decimal.Parse(txtMonto.Text);
 
@@ -208,10 +207,7 @@ namespace CapaVista
                         Cantidad = (int)row["Cantidad"]
                     };
 
-                    var producto = _controlProducto.ObtenerProducto(detalle.ProductoId);
-
                     venta.Detalles.Add(detalle);
-                    productos.Add(producto);
                 }
 
                 int resultado = _controlVenta.Guardar(venta, 0, false);
@@ -220,9 +216,9 @@ namespace CapaVista
                     MessageBox.Show("Venta procesada con exito", "UNAB|Chalatenango, El Salvador", 
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    VisorRptFactura objVsrFactura = new VisorRptFactura(venta, productos);
+                    VisorRptFactura objVsrFactura = new VisorRptFactura(venta.VentaId);
                     objVsrFactura.ShowDialog();
-                    this.Close();
+                    LimpiarCampos(true);
                 }
                 else
                 {
@@ -280,10 +276,19 @@ namespace CapaVista
             txtMonto.Text = montoTotal.ToString();
         }
 
-        private void LimpiarCampos()
+        private void LimpiarCampos(bool esProcesada = false)
         {
-            txtCodigo.Text = "0";
-            txtCantidad.Clear();
+            if (esProcesada)
+            {
+                detalleVenta.Clear();
+                dgvDetalleVenta.DataSource = detalleVenta;
+                CalcularMontoTotal();
+            }
+            else
+            {
+                txtCodigo.Text = "0";
+                txtCantidad.Clear();
+            }
         }
 
         private void dgvDetalleVenta_UserDeletedRow(object sender, DataGridViewRowEventArgs e)

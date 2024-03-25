@@ -375,7 +375,6 @@
             this.Name = "MantenimientoProductos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tienda | Mantenimiento de Productos";
-            this.Load += new System.EventHandler(this.MantenimientoProductos_Load);
             this.gpFiltro.ResumeLayout(false);
             this.gpFiltro.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();

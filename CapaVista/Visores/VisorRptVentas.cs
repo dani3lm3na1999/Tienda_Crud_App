@@ -12,30 +12,33 @@ using System.Windows.Forms;
 
 namespace CapaVista.Visores
 {
-    public partial class VisorRptFactura : Form
+    public partial class VisorRptVentas : Form
     {
         DetalleLOG _controlDetalle;
-        private int _ventaId;
-        private RptFacturaVenta objRpt;
-        public VisorRptFactura(int ventaId)
+        private DateTime _fechaIni;
+        private DateTime _fechaFin;
+        private RptVentas objRptVentas;
+
+        public VisorRptVentas(DateTime fechaIni, DateTime fechaFin)
         {
             InitializeComponent();
-            _ventaId = ventaId;
-            CargarReporte();
-            crvFactura.AllowedExportFormats = (int)CrystalDecisions.Shared.ViewerExportFormats.PdfFormat;
+            _fechaIni = fechaIni;
+            _fechaFin = fechaFin;
+            GenerarReporte();
+            crvRptVentas.AllowedExportFormats = (int)CrystalDecisions.Shared.ViewerExportFormats.PdfFormat;
         }
 
-        private void CargarReporte()
+        private void GenerarReporte()
         {
             try
             {
                 _controlDetalle = new DetalleLOG();
-                objRpt = new RptFacturaVenta();
+                objRptVentas = new RptVentas();
 
-                var factura = _controlDetalle.FacturaVenta(_ventaId);
+                var reporte = _controlDetalle.ReporteVentas(_fechaIni, _fechaFin);
 
-                objRpt.SetDataSource(factura);
-                crvFactura.ReportSource = objRpt;                              
+                objRptVentas.SetDataSource(reporte);
+                crvRptVentas.ReportSource = objRptVentas;
             }
             catch (Exception)
             {

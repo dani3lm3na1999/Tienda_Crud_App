@@ -37,7 +37,8 @@ namespace CapaVista
 
         private void MnReporteVentas_Click(object sender, EventArgs e)
         {
-
+            MantenimientoVentas objMttVentas = new MantenimientoVentas();
+            objMttVentas.ShowDialog();
         }
     }
 }
